@@ -5,14 +5,25 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import LogIn from "./LogIn";
 import Register from "./Register"
 import Home from "./Home"
+import Dashboard from "./Dashboard";
+import Submit from "./Submit"
+import Team from "./Team"
+import Bug from "./Bug"
+import Error from "./Error"
 
 function App() {
+
   return(
     <BrowserRouter>
     <Routes>
       <Route path="/" element={<Home/>}/>
-      <Route path="/login" element={<LogIn/>}/>
+      <Route path="/login" element={<LogIn />}/>
       <Route path="/register" element={<Register/>}/>
+      <Route path="/dashboard" element={<Dashboard />}/>
+      <Route path="/submit" element={<Submit />}/>
+      <Route path="/team" element={<Team/>}/>
+      <Route path="/ticket/:id" element={<Bug/>}/>
+      <Route path="*" element={<Error/>}/>
     </Routes>
   </BrowserRouter>
   )

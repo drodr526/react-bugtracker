@@ -8,24 +8,33 @@ function Register() {
     let [lastName, setLastName] = useState("");
     let [userEmail, setEmail] = useState("");
     let [userPassword, setPassword] = useState("");
+    let [resData, setResData] = useState(null);
 
-    const handleSubmit = () => {
+    const navigate = useNavigate();
+
+    const handleSubmit = (event) => {
+        event.preventDefault();
         axios.post("http://localhost:4000/register",
-            { username: userEmail, password: userPassword },
+            { firstName: firstName, lastName:lastName, username: userEmail, password: userPassword },
             { withCredentials: true })
-            .then((res) => console.log(res))
+            .then((res) => {
+                if(res.data == "User created"){
+                    navigate("/login")
+                }
+                setResData(res)
+            })
     }
 
     return (
             <div className="signin-form container text-center col-lg-3">
                 <form onSubmit={handleSubmit}>
-                    <img className="mb-4" src="images/robot-logo.jpg" alt="" width="144" height="114" />
+                    <img className="mb-4" src="images/bug.png" alt="" width="144" height="144" />
                     <h1 className="h3 mb-3 fw-normal">Register</h1>
 
                     <div className="form-floating">
                         <input type="text" 
                         onChange={(event)=>setFirstName(event.target.value)}
-                        className="form-control" 
+                        className="form-control bg-dark text-white" 
                         placeholder="John" 
                         value={firstName}/>
                         <label htmlFor="floatingInput">First Name</label>
@@ -34,7 +43,7 @@ function Register() {
                     <div className="form-floating">
                         <input type="text" 
                         onChange={(event)=>setLastName(event.target.value)}
-                        className="form-control" 
+                        className="form-control bg-dark text-white" 
                         placeholder="Smith" 
                         value={lastName}/>
                         <label htmlFor="floatingInput">Last Name</label>
@@ -43,7 +52,7 @@ function Register() {
                     <div className="form-floating">
                         <input type="email" 
                         onChange={(event)=>setEmail(event.target.value)}
-                        className="form-control" 
+                        className="form-control bg-dark text-white" 
                         placeholder="name@example.com" 
                         value={userEmail}/>
                         <label htmlFor="floatingInput">Email address</label>
@@ -51,7 +60,7 @@ function Register() {
                     <div className="form-floating">
                         <input type="password" 
                         onChange={(event)=>setPassword(event.target.value)} 
-                        className="form-control" 
+                        className="form-control bg-dark text-white" 
                         placeholder="Password" 
                         value={userPassword}/>
                         <label htmlFor="floatingPassword">Password</label>
@@ -68,6 +77,8 @@ function Register() {
                     </button>
                     <p className="mt-5 mb-3 text-muted">&copy; 2022</p>
                 </form>
+
+                {resData && <h1>{resData.data}</h1>}
             </div>
     )
 }

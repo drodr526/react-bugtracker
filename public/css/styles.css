@@ -1,4 +1,128 @@
-.signin-form
-{
+h1 {
+    font-family: 'Roboto Mono', monospace;
+    margin: 20px 0;
+}
+
+body {
+    color: aliceblue;
+    background-color: rgb(28, 28, 28);
+    font-family: 'Source Code Pro', monospace;
+}
+
+.box-and-button{
+    margin: 0 0 50px 0;
+}
+
+.bugs-list-container {
+    left: 350px;
+    position: absolute;
+    width: 75%;
+    margin: 20px 0;
+}
+
+.comments {
+    left: 1200px;
+    position: absolute;
+    width: 600px;
+    margin: 20px 0;
+}
+
+.comments input{
+    margin: 10px 0 ;
+}
+
+.comments button{
+    float: right;
+}
+
+.contacts-names {
+    font-size: 24px;
+    margin: 30px 20px;
+}
+
+.contacts-emails {
+    left: 350px;
+    position: absolute;
+    width: 800px;
+    margin: 20px 0;
+
+}
+
+.home-page {
+    text-align: center;
+    margin-top: 15%;
+}
+
+.logout {
+    float: center;
+    margin: 15px;
+}
+
+.sidebar {
+    position: fixed;
+}
+
+.signin-form {
     margin: 100px auto;
+}
+
+.user-list-container {
+    left: 350px;
+    position: absolute;
+    width: 800px;
+    margin: 20px 0;
+}
+
+.ticket-table tbody tr td,
+.ticket-table thead tr th {
+    background-color: rgb(28, 28, 28);
+}
+
+.ticket-table tbody tr:hover td,
+.ticket-table tbody tr:hover th {
+    background-color: rgb(72, 72, 72);
+    cursor: pointer;
+}
+
+.ticket-table td {
+    white-space: nowrap;
+}
+
+.user-list-container {
+    left: 350px;
+    position: absolute;
+    width: 800px;
+    margin: 20px 0;
+}
+
+.user-list-container tbody tr td,
+.user-list-container thead tr th {
+    background-color: rgb(28, 28, 28);
+}
+
+.singular-ticket-container {
+    left: 350px;
+    position: absolute;
+    width: 600px;
+    margin: 20px 0;
+    padding: 0 0 20px 0;
+}
+
+
+.submit-container {
+    left: 350px;
+    position: absolute;
+    width: 800px;
+    margin: 20px 0;
+}
+
+.submit-container textarea {
+    resize: none;
+    margin: 30px 0;
+}
+
+.submit-container select {
+    width: 800px;
+    resize: none;
+    margin: 20px 0;
 }

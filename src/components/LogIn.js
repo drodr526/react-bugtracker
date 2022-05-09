@@ -1,45 +1,50 @@
-import React, { useState } from "react";
+import React, { useEffect, useState} from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-function LogIn() {
+function LogIn(props) {
     let [userEmail, setEmail] = useState("");
     let [userPassword, setPassword] = useState("");
-    const [userData, setUserData] = useState(null);
+    
+    const [errorMessage, setErrorMessage] = useState("");
     let navigate = useNavigate();
+
+    useEffect(()=>{
+        axios.get("http://localhost:4000/getuser",
+            { withCredentials: true })
+            .then((res)=>{
+                if(res.data.username){
+                    navigate("/dashboard")
+                }
+            })
+    })
 
     const handleSubmit = (event) => {
         event.preventDefault();
+        //log in 
         axios.post("http://localhost:4000/login",
             { username: userEmail, password: userPassword },
             { withCredentials: true })
-            .then((res) => console.log(res))
-    }
-    const getUser = () => {
-        axios.get("http://localhost:4000/getuser",
-            { withCredentials: true })
-            .then((res) => setUserData(res.data));
-    }
-    const logout = () => {
-        axios.get("http://localhost:4000/logout",
-            { withCredentials: true })
-            .then((res) => {
-                console.log(res);
-                setUserData(null);
-            });
-        window.location.reload(false);
+            .then((res) =>{
+                if(res.data.username){
+                    navigate("/dashboard")
+                }
+                else{
+                    setErrorMessage(res.data);
+                }
+            })
     }
 
     return (
         <div className="signin-form container text-center col-lg-3">
             <form onSubmit={handleSubmit}>
-                <img className="mb-4" src="images/robot-logo.jpg" alt="" width="144" height="114" />
+                <img className="mb-4" src="images/bug.png" alt="" width="144" height="144" />
                 <h1 className="h3 mb-3 fw-normal">Log In</h1>
 
                 <div className="form-floating">
                     <input type="email"
                         onChange={(event) => setEmail(event.target.value)}
-                        className="form-control"
+                        className="form-control bg-dark text-white"
                         placeholder="name@example.com"
                         value={userEmail} />
                     <label htmlFor="floatingInput">Email address</label>
@@ -47,16 +52,10 @@ function LogIn() {
                 <div className="form-floating">
                     <input type="password"
                         onChange={(event) => setPassword(event.target.value)}
-                        className="form-control"
+                        className="form-control bg-dark text-white"
                         placeholder="Password"
                         value={userPassword} />
                     <label htmlFor="floatingPassword">Password</label>
-                </div>
-
-                <div className="checkbox mb-3">
-                    <label>
-                        <input type="checkbox" value="remember-me" /> Remember me
-                    </label>
                 </div>
                 <button
                     className="w-100 btn btn-lg btn-primary"
@@ -64,9 +63,7 @@ function LogIn() {
                 </button>
                 <p className="mt-5 mb-3 text-muted">&copy; 2022</p>
             </form>
-            <button onClick={logout}>Log out</button>
-            <button onClick={getUser}>Get User</button>
-            {userData && <h1>{userData.username}</h1>}
+            {errorMessage != "" ? <h1>{errorMessage}</h1> : null}
         </div>
     )
 }
