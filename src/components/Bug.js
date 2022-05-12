@@ -11,6 +11,7 @@ function Bug() {
     const [warning, setWarning] = useState(null);
     const [comment, setComment] = useState("")
     const [showModal, setShowModal] = useState(false);
+    const [isAdmin, setIsAdmin] = useState(false);
     let { id } = useParams();
 
     useEffect(() => {
@@ -26,6 +27,7 @@ function Bug() {
                     navigate("/login")
                 } else {
                     setUserData(res.data);
+                    setIsAdmin(res.data.admin)
                 }
             })
     }
@@ -69,6 +71,7 @@ function Bug() {
             <div className="singular-ticket-container">
                 <h1>{warning}</h1>
                 <h1>{bugData && bugData.title}</h1>
+                <p style={{color:"gray"}}>{bugData && bugData.timeSubmitted}</p>
                 <p style={{ color: "#ad1341" }}>Team: {bugData && bugData.team.map((dev) => {
                     if (isFirstDev) {
                         isFirstDev = false
@@ -78,7 +81,8 @@ function Bug() {
                     }
                 })}</p>
                 <p>{bugData && bugData.description}</p>
-                <button type="button" className="btn btn-danger" onClick={()=>setShowModal(!showModal)}>Close ticket</button>
+                {isAdmin && <button type="button" className="btn btn-danger close-button" onClick={()=>setShowModal(!showModal)}>Close ticket</button>}
+                {isAdmin && <button type="button" className="btn btn-primary edit-button" onClick={()=>navigate("/edit/"+id)}>Edit</button>}
             </div>
             <div className="comments">
                 <h1>Comments</h1>

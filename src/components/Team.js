@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Sidebar from "./Sidebar"
+import { Button } from "react-bootstrap";
 
 
 function Team() {
@@ -37,6 +38,12 @@ function Team() {
 
     }
 
+    function goToUserPage(userID){
+        if(userData.admin){
+            navigate("/user/"+userID)
+        }
+    }
+
     return (
         <div>
             <div className="user-list-container">
@@ -52,22 +59,16 @@ function Team() {
                     </thead>
                     <tbody>
                         {allUsers.map((user) => {
-                            return (<tr key={user._id}>
+                            return (<tr key={user._id} onClick={()=>goToUserPage(user._id)}>
                                 <td>{user.firstName}</td>
                                 <td>{user.lastName}</td>
                                 <td>{user.username}</td>
                             </tr>
                             )
-
-
                         })}
                     </tbody>
                 </table>
-
             </div>
-
-
-
             <Sidebar userData={userData} />
         </div>
 

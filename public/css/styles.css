@@ -79,16 +79,13 @@ body {
 }
 
 .ticket-table tbody tr:hover td,
-.ticket-table tbody tr:hover th {
+.ticket-table tbody tr:hover th,
+.user-list-container tbody tr:hover td {
     background-color: rgb(72, 72, 72);
     cursor: pointer;
 }
 
-.ticket-table td {
-    white-space: nowrap;
-}
-
-.user-list-container {
+.user-list-container, .singular-user-container {
     left: 350px;
     position: absolute;
     width: 800px;
@@ -108,6 +105,13 @@ body {
     padding: 0 0 20px 0;
 }
 
+.singular-ticket-container .edit-button{
+    margin: 0 0 0 50px;
+}
+
+.singular-user-container input{
+    margin: 0 0 25px 0 ;
+}
 
 .submit-container {
     left: 350px;

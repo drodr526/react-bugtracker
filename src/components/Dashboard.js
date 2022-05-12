@@ -40,6 +40,10 @@ function Dashboard() {
             })
     }
 
+    const shortTitleMaxLength = 60;
+    const shortNamesMaxLength = 35;
+    const shortDescriptionMaxLength = 120;
+
     return (
         <div>
             <div className="bugs-list-container">
@@ -56,8 +60,8 @@ function Dashboard() {
                     </thead>
                     <tbody>
                         {allBugs && allBugs.map((bug) => {
-                            const shortTitle = bug.title.substring(0,35);
-                            const shortDescription = bug.description.substring(0,70);
+                            const shortTitle = bug.title.substring(0,shortTitleMaxLength);
+                            const shortDescription = bug.description.substring(0,shortDescriptionMaxLength);
                             let shortNames = "";
                             
                             let isFirstDev = true;
@@ -72,12 +76,12 @@ function Dashboard() {
                                 
                             })
 
-                            shortNames = shortNames.substring(0,35);
+                            shortNames = shortNames.substring(0,shortNamesMaxLength);
 
                             return (<tr key={bug._id} onClick={()=>navigate("/ticket/"+bug._id)}>
-                                <td>{shortTitle}{shortTitle.length == 35 ? "..." : null}</td>
-                                <td>{shortDescription}{shortDescription.length == 70 ? "..." : null}</td>
-                                <td>{"(" + bug.team.length + ") "}{shortNames}{shortNames.length == 35 ? "..." : null}</td>
+                                <td><p>{shortTitle}{shortTitle.length == shortTitleMaxLength ? "..." : null}</p> <br/> <p style={{color:"gray"}}>{bug.timeSubmitted}</p></td>
+                                <td>{shortDescription}{shortDescription.length == shortDescriptionMaxLength ? "..." : null}</td>
+                                <td>{<strong>({bug.team.length}) </strong>}{shortNames}{shortNames.length == shortNamesMaxLength ? "..." : null}</td>
                             </tr>
                             )
 

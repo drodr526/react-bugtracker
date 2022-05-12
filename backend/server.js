@@ -90,12 +90,52 @@ app.post("/comment/:idToSearch", (req, res) => {
     });
 })
 
+app.put("/edit/:idToSearch", (req, res) => {
+
+    Bug.findByIdAndUpdate(req.params.idToSearch, 
+        {title:req.body.title, 
+            description:req.body.description, 
+            team:req.body.team
+        }, (err,doc)=>{
+        if(err){
+            res.send("Could not edit")
+        }else{
+            res.send(doc)
+        } 
+    });
+})
+
+app.put("/get-one-user/:idToSearch", (req, res) => {
+
+    User.findByIdAndUpdate(req.params.idToSearch, 
+        {firstName:req.body.firstName, 
+            lastName:req.body.lastName, 
+            username:req.body.email,
+            admin:req.body.admin
+        }, (err,doc)=>{
+        if(err){
+            res.send("Could not edit")
+        }else{
+            res.send(doc)
+        } 
+    });
+})
+
 app.delete("/ticket/:idToSearch", (req, res) => {
     Bug.findByIdAndDelete(req.params.idToSearch, (err, foundBug) => {
         if (foundBug)
             res.send(foundBug)
         else
             res.send("No ticket found.")
+    })
+})
+
+app.get("/get-one-user/:idToSearch", (req,res)=>{
+    User.findById(req.params.idToSearch,(err, foundUser)=>{
+        if(foundUser)
+            res.send(foundUser)
+        else
+            res.send("No user found.");
     })
 })
 
@@ -129,7 +169,7 @@ app.post("/submit", (req, res) => {
 
     var today = new Date();
     var date = (today.getMonth() + 1) + '/' + today.getDate() + '/' + today.getFullYear();
-    var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+    var time = today.getHours() + ":" + today.getMinutes();
     var dateTime = date + ' ' + time;
 
     const newBug = new Bug({

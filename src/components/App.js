@@ -10,6 +10,8 @@ import Submit from "./Submit"
 import Team from "./Team"
 import Bug from "./Bug"
 import Error from "./Error"
+import Edit from "./Edit"
+import User from "./User"
 
 function App() {
 
@@ -23,6 +25,8 @@ function App() {
       <Route path="/submit" element={<Submit />}/>
       <Route path="/team" element={<Team/>}/>
       <Route path="/ticket/:id" element={<Bug/>}/>
+      <Route path="/edit/:id" element={<Edit/>}/>
+      <Route path="/user/:id" element={<User/>}/>
       <Route path="*" element={<Error/>}/>
     </Routes>
   </BrowserRouter>
