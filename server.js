@@ -9,9 +9,7 @@ const cors = require("cors");
 const bodyParser = require("body-parser");
 const User = require("./models/user");
 const Bug = require("./models/bug")
-const dotenv = require("dotenv");
-
-dotenv.config();
+const dotenv = require("dotenv").config();
 
 mongoose.connect(process.env.MONGODB_URL || 'mongodb://localhost:27017/bugtrackerDB');
 
