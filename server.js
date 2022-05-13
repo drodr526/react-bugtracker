@@ -10,7 +10,6 @@ const bodyParser = require("body-parser");
 const User = require("./models/user");
 const Bug = require("./models/bug")
 const dotenv = require("dotenv");
-const res = require("express/lib/response");
 
 dotenv.config();
 
