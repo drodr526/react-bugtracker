@@ -27,7 +27,7 @@ function App() {
       <Route path="/ticket/:id" element={<Bug/>}/>
       <Route path="/edit/:id" element={<Edit/>}/>
       <Route path="/user/:id" element={<User/>}/>
-      <Route path="*" element={<Error/>}/>
+      {/* <Route path="*" element={<Error/>}/> */}
     </Routes>
   </BrowserRouter>
   )
