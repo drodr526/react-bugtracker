@@ -34,6 +34,15 @@ app.use(passport.initialize());
 app.use(passport.session());
 require("./passportConfig")(passport);
 
+app.get('/*', function (req, res) {
+    res.sendFile(path.join(__dirname, './client/public/index.html'), function (err) {
+        if (err) {
+            res.status(500).send(err)
+        }
+    })
+})
+
+
 app.post("/api/login", (req, res, next) => {
     passport.authenticate("local", (err, user, info) => {
         if (err) throw err;
@@ -83,44 +92,46 @@ app.post("/api/comment/:idToSearch", (req, res) => {
     const name = req.user.firstName + " " + req.user.lastName;
     const comment = req.body.comment;
 
-    Bug.findByIdAndUpdate(req.params.idToSearch, { $push: { comments: {name:name, comment:comment} }}, (err,doc)=>{
-        if(err){
+    Bug.findByIdAndUpdate(req.params.idToSearch, { $push: { comments: { name: name, comment: comment } } }, (err, doc) => {
+        if (err) {
             res.send("Could not comment")
-        }else{
+        } else {
             res.send(doc)
-        } 
+        }
     });
 })
 
 app.put("/api/edit/:idToSearch", (req, res) => {
 
-    Bug.findByIdAndUpdate(req.params.idToSearch, 
-        {title:req.body.title, 
-            description:req.body.description, 
-            team:req.body.team
-        }, (err,doc)=>{
-        if(err){
-            res.send("Could not edit")
-        }else{
-            res.send(doc)
-        } 
-    });
+    Bug.findByIdAndUpdate(req.params.idToSearch,
+        {
+            title: req.body.title,
+            description: req.body.description,
+            team: req.body.team
+        }, (err, doc) => {
+            if (err) {
+                res.send("Could not edit")
+            } else {
+                res.send(doc)
+            }
+        });
 })
 
 app.put("/api/get-one-user/:idToSearch", (req, res) => {
 
-    User.findByIdAndUpdate(req.params.idToSearch, 
-        {firstName:req.body.firstName, 
-            lastName:req.body.lastName, 
-            username:req.body.email,
-            admin:req.body.admin
-        }, (err,doc)=>{
-        if(err){
-            res.send("Could not edit")
-        }else{
-            res.send(doc)
-        } 
-    });
+    User.findByIdAndUpdate(req.params.idToSearch,
+        {
+            firstName: req.body.firstName,
+            lastName: req.body.lastName,
+            username: req.body.email,
+            admin: req.body.admin
+        }, (err, doc) => {
+            if (err) {
+                res.send("Could not edit")
+            } else {
+                res.send(doc)
+            }
+        });
 })
 
 app.delete("/api/ticket/:idToSearch", (req, res) => {
@@ -132,9 +143,9 @@ app.delete("/api/ticket/:idToSearch", (req, res) => {
     })
 })
 
-app.get("/api/get-one-user/:idToSearch", (req,res)=>{
-    User.findById(req.params.idToSearch,(err, foundUser)=>{
-        if(foundUser)
+app.get("/api/get-one-user/:idToSearch", (req, res) => {
+    User.findById(req.params.idToSearch, (err, foundUser) => {
+        if (foundUser)
             res.send(foundUser)
         else
             res.send("No user found.");
@@ -182,24 +193,16 @@ app.post("/api/submit", (req, res) => {
         timeSubmitted: dateTime
     })
     newBug.save()
-    .then(()=>{
-        res.send("Submitted successfully");
-    })
+        .then(() => {
+            res.send("Submitted successfully");
+        })
 })
 
 app.listen(PORT, () => {
     console.log("Server started on port " + PORT);
 })
 
-if(process.env.NODE_ENV == "production"){
+if (process.env.NODE_ENV == "production") {
     app.use(express.static("client/build"));
 }
 
-app.get('/*', function(req, res) {
-    res.sendFile(path.join(__dirname, './public/index.html'), function(err) {
-      if (err) {
-        res.status(500).send(err)
-      }
-    })
-  })
-  
