@@ -35,7 +35,7 @@ app.use(passport.session());
 require("./passportConfig")(passport);
 
 app.get('/*', function (req, res) {
-    res.sendFile(path.join(__dirname, '/client/build/index.html'), function (err) {
+    res.sendFile(path.join(__dirname, 'client/build/index.html'), function (err) {
         if (err) {
             res.status(500).send("Error: " + err)
         }
