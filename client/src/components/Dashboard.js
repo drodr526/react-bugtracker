@@ -17,7 +17,7 @@ function Dashboard() {
     }, []) //empty array param in useEffect makes it only run once!
 
     function checkIfLoggedIn() {
-        axios.get("/getuser",
+        axios.get("/api/getuser",
             { withCredentials: true })
             .then((res) => {
                 if (res.data.username == null) {
@@ -29,7 +29,7 @@ function Dashboard() {
     }
 
     function getAllBugs() {
-        axios.get("/get-all-bugs",
+        axios.get("/api/get-all-bugs",
             { withCredentials: true })
             .then((res) => {
                 if(res.data == "No bugs found"){

@@ -19,7 +19,7 @@ function User() {
     }, []) //empty array param in useEffect makes it only run once!
 
     function checkIfLoggedIn() {
-        axios.get("/getuser",
+        axios.get("/api/getuser",
             { withCredentials: true })
             .then((res) => {
                 if (res.data.username == null) {
@@ -31,7 +31,7 @@ function User() {
     }
 
     function getOneUser() {
-        axios.get("/get-one-user/" + id,
+        axios.get("/api/get-one-user/" + id,
             { withCredentials: true })
             .then((res) => {
                 setFirstName(res.data.firstName)
@@ -43,7 +43,7 @@ function User() {
     }
 
     function updateUser(){
-        axios.put("/get-one-user/" + id,
+        axios.put("/api/get-one-user/" + id,
         {firstName:firstName, lastName:lastName, email:email, admin:makeUserAdmin},
         {withCredentials:true})
         .then((res)=>{

@@ -34,7 +34,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 require("./passportConfig")(passport);
 
-app.post("/login", (req, res, next) => {
+app.post("/api/login", (req, res, next) => {
     passport.authenticate("local", (err, user, info) => {
         if (err) throw err;
         if (!user) res.send("No user exists or password is incorrect.")
@@ -47,7 +47,7 @@ app.post("/login", (req, res, next) => {
         }
     })(req, res, next);
 })
-app.post("/register", (req, res) => {
+app.post("/api/register", (req, res) => {
     User.findOne({ username: req.body.username }, async (err, doc) => {
         if (err) throw err;
         if (doc) res.send("User already exists");
@@ -65,11 +65,11 @@ app.post("/register", (req, res) => {
         }
     })
 })
-app.get("/getuser", (req, res) => {
+app.get("/api/getuser", (req, res) => {
     res.send(req.user);
 })
 
-app.get("/ticket/:idToSearch", (req, res) => {
+app.get("/api/ticket/:idToSearch", (req, res) => {
     Bug.findById(req.params.idToSearch, (err, foundBug) => {
         if (foundBug)
             res.send(foundBug)
@@ -78,7 +78,7 @@ app.get("/ticket/:idToSearch", (req, res) => {
     })
 })
 
-app.post("/comment/:idToSearch", (req, res) => {
+app.post("/api/comment/:idToSearch", (req, res) => {
 
     const name = req.user.firstName + " " + req.user.lastName;
     const comment = req.body.comment;
@@ -92,7 +92,7 @@ app.post("/comment/:idToSearch", (req, res) => {
     });
 })
 
-app.put("/edit/:idToSearch", (req, res) => {
+app.put("/api/edit/:idToSearch", (req, res) => {
 
     Bug.findByIdAndUpdate(req.params.idToSearch, 
         {title:req.body.title, 
@@ -107,7 +107,7 @@ app.put("/edit/:idToSearch", (req, res) => {
     });
 })
 
-app.put("/get-one-user/:idToSearch", (req, res) => {
+app.put("/api/get-one-user/:idToSearch", (req, res) => {
 
     User.findByIdAndUpdate(req.params.idToSearch, 
         {firstName:req.body.firstName, 
@@ -123,7 +123,7 @@ app.put("/get-one-user/:idToSearch", (req, res) => {
     });
 })
 
-app.delete("/ticket/:idToSearch", (req, res) => {
+app.delete("/api/ticket/:idToSearch", (req, res) => {
     Bug.findByIdAndDelete(req.params.idToSearch, (err, foundBug) => {
         if (foundBug)
             res.send(foundBug)
@@ -132,7 +132,7 @@ app.delete("/ticket/:idToSearch", (req, res) => {
     })
 })
 
-app.get("/get-one-user/:idToSearch", (req,res)=>{
+app.get("/api/get-one-user/:idToSearch", (req,res)=>{
     User.findById(req.params.idToSearch,(err, foundUser)=>{
         if(foundUser)
             res.send(foundUser)
@@ -141,7 +141,7 @@ app.get("/get-one-user/:idToSearch", (req,res)=>{
     })
 })
 
-app.get("/get-all-users", (req, res) => {
+app.get("/api/get-all-users", (req, res) => {
     User.find({}, (err, foundUsers) => {
         if (foundUsers.length > 0) {
             res.send(foundUsers)
@@ -151,7 +151,7 @@ app.get("/get-all-users", (req, res) => {
     });
 })
 
-app.get("/get-all-bugs", (req, res) => {
+app.get("/api/get-all-bugs", (req, res) => {
     Bug.find({}, (err, foundBugs) => {
         if (foundBugs.length > 0) {
             res.send(foundBugs)
@@ -161,13 +161,13 @@ app.get("/get-all-bugs", (req, res) => {
     });
 })
 
-app.get("/logout", (req, res) => {
+app.get("/api/logout", (req, res) => {
     req.logout()
     req.session.destroy();
     res.send(req.user)
 })
 
-app.post("/submit", (req, res) => {
+app.post("/api/submit", (req, res) => {
 
     var today = new Date();
     var date = (today.getMonth() + 1) + '/' + today.getDate() + '/' + today.getFullYear();

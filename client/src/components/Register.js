@@ -14,7 +14,7 @@ function Register() {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        axios.post("/register",
+        axios.post("/api/register",
             { firstName: firstName, lastName:lastName, username: userEmail, password: userPassword },
             { withCredentials: true })
             .then((res) => {
