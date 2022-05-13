@@ -14,7 +14,7 @@ function Register() {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        axios.post("http://localhost:4000/register",
+        axios.post("/register",
             { firstName: firstName, lastName:lastName, username: userEmail, password: userPassword },
             { withCredentials: true })
             .then((res) => {
@@ -64,12 +64,6 @@ function Register() {
                         placeholder="Password" 
                         value={userPassword}/>
                         <label htmlFor="floatingPassword">Password</label>
-                    </div>
-
-                    <div className="checkbox mb-3">
-                        <label>
-                            <input type="checkbox" value="remember-me" /> Remember me
-                        </label>
                     </div>
                     <button 
                     className="w-100 btn btn-lg btn-primary" 

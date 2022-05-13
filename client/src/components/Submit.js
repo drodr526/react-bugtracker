@@ -26,7 +26,7 @@ function Submit() {
     },[]) //empty array param in useEffect makes it only run once!
 
     function checkIfLoggedIn() {
-        axios.get("http://localhost:4000/getuser",
+        axios.get("/getuser",
             { withCredentials: true })
             .then((res) => {
                 if (res.data.username == null) {
@@ -38,7 +38,7 @@ function Submit() {
     }
 
     function getAllUsers() {
-        axios.get("http://localhost:4000/get-all-users",
+        axios.get("/get-all-users",
             { withCredentials: true })
             .then((res) => {
                 setAllUsers(res.data);
@@ -49,7 +49,7 @@ function Submit() {
         if (bugTitle == "" || bugDescription == "" || assignedDev == "") {
             setWarning("Please fill in all fields");
         } else {
-            axios.post("http://localhost:4000/submit",
+            axios.post("/submit",
                 { title: bugTitle, description: bugDescription, team: assignedDev },
                 { withCredentials: true })
                 .then((res)=>{

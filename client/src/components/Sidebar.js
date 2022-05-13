@@ -7,7 +7,7 @@ function Sidebar(props){
     const navigate = useNavigate();
     
     const logout = () => {
-        axios.get("http://localhost:4000/logout",
+        axios.get("/logout",
             { withCredentials: true })
             .then((res)=>{
                 if(res.data == ""){

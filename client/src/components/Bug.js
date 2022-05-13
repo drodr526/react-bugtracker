@@ -20,7 +20,7 @@ function Bug() {
     }, []) //empty array param in useEffect makes it only run once!
 
     function checkIfLoggedIn() {
-        axios.get("http://localhost:4000/getuser",
+        axios.get("/getuser",
             { withCredentials: true })
             .then((res) => {
                 if (res.data.username == null) {
@@ -33,7 +33,7 @@ function Bug() {
     }
 
     function getBug() {
-        axios.get("http://localhost:4000/ticket/" + id,
+        axios.get("/ticket/" + id,
             { withCredentials: true })
             .then((res) => {
                 if (res.data.title)
@@ -44,7 +44,7 @@ function Bug() {
     }
 
     const postComment = () => {
-        axios.post("http://localhost:4000/comment/" + id,
+        axios.post("/comment/" + id,
             { comment: comment },
             { withCredentials: true })
             .then((res) => {
@@ -55,7 +55,7 @@ function Bug() {
     }
 
     const deleteTicket = () =>{
-        axios.delete("http://localhost:4000/ticket/" + id,
+        axios.delete("/ticket/" + id,
             { withCredentials: true })
             .then((res) => {
                 if (res.status == 200) {

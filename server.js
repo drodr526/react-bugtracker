@@ -9,10 +9,15 @@ const cors = require("cors");
 const bodyParser = require("body-parser");
 const User = require("./models/user");
 const Bug = require("./models/bug")
+const dotenv = require("dotenv");
+const res = require("express/lib/response");
 
-mongoose.connect('mongodb://localhost:27017/bugtrackerDB');
+dotenv.config();
+
+mongoose.connect(process.env.MONGODB_URL || 'mongodb://localhost:27017/bugtrackerDB');
 
 const app = express();
+const PORT = process.env.PORT || 4000;
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -22,12 +27,12 @@ app.use(cors({
 }));
 
 app.use(session({
-    secret: "secretcode",
+    secret: process.env.SECRET,
     resave: true,
     saveUninitialized: true
 }));
 
-app.use(cookieParser("secretcode"));
+app.use(cookieParser(process.env.SECRET));
 app.use(passport.initialize());
 app.use(passport.session());
 require("./passportConfig")(passport);
@@ -185,6 +190,10 @@ app.post("/submit", (req, res) => {
     })
 })
 
-app.listen(4000, () => {
-    console.log("Server started on port 4000");
+app.listen(PORT, () => {
+    console.log("Server started on port " + PORT);
 })
+
+if(process.env.NODE_ENV == "production"){
+    app.use(express.static("client/build"));
+}

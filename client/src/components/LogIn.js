@@ -10,7 +10,7 @@ function LogIn(props) {
     let navigate = useNavigate();
 
     useEffect(()=>{
-        axios.get("http://localhost:4000/getuser",
+        axios.get("/getuser",
             { withCredentials: true })
             .then((res)=>{
                 if(res.data.username){
@@ -22,7 +22,7 @@ function LogIn(props) {
     const handleSubmit = (event) => {
         event.preventDefault();
         //log in 
-        axios.post("http://localhost:4000/login",
+        axios.post("/login",
             { username: userEmail, password: userPassword },
             { withCredentials: true })
             .then((res) =>{

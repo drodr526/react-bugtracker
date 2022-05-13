@@ -18,7 +18,7 @@ function Team() {
     }, []) //empty array param in useEffect makes it only run once!
 
     function checkIfLoggedIn() {
-        axios.get("http://localhost:4000/getuser",
+        axios.get("/getuser",
             { withCredentials: true })
             .then((res) => {
                 if (res.data.username == null) {
@@ -30,7 +30,7 @@ function Team() {
     }
 
     function getAllUsers() {
-        axios.get("http://localhost:4000/get-all-users",
+        axios.get("/get-all-users",
             { withCredentials: true })
             .then((res) => {
                 setAllUsers(res.data);

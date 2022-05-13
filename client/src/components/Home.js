@@ -1,8 +1,16 @@
-import React from "react";
+import axios from "axios";
+import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 function Home(){
     const navigate = useNavigate();
+
+
+    useEffect(()=>{
+        axios.get("/test")
+        .then((res)=>console.log(res.data))
+    },[]);
+
     return(
         <div className="home-page">
             <img className="mb-4" src="images/bug.png" alt="" width="144" height="144" />

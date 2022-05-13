@@ -18,7 +18,7 @@ function Edit() {
     const [warning, setWarning] = useState("");
 
     function getBug() {
-        axios.get("http://localhost:4000/ticket/" + id,
+        axios.get("/ticket/" + id,
             { withCredentials: true })
             .then((res) => {
                 if (res.data.title){
@@ -42,7 +42,7 @@ function Edit() {
     },[]) //empty array param in useEffect makes it only run once!
 
     function checkIfLoggedIn() {
-        axios.get("http://localhost:4000/getuser",
+        axios.get("/getuser",
             { withCredentials: true })
             .then((res) => {
                 if (res.data.username == null) {
@@ -54,7 +54,7 @@ function Edit() {
     }
 
     function getAllUsers() {
-        axios.get("http://localhost:4000/get-all-users",
+        axios.get("/get-all-users",
             { withCredentials: true })
             .then((res) => {
                 setAllUsers(res.data);
@@ -65,7 +65,7 @@ function Edit() {
         if (bugTitle == "" || bugDescription == "" || assignedDev == "") {
             setWarning("Please fill in all fields");
         } else {
-            axios.put("http://localhost:4000/edit/"+id,
+            axios.put("/edit/"+id,
                 { title: bugTitle, description: bugDescription, team: assignedDev },
                 { withCredentials: true })
                 .then((res)=>{
