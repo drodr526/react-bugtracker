@@ -10,6 +10,7 @@ const bodyParser = require("body-parser");
 const User = require("./models/user");
 const Bug = require("./models/bug")
 const dotenv = require("dotenv").config();
+const path = require('path');
 
 mongoose.connect(process.env.MONGODB_URL || 'mongodb://localhost:27017/bugtrackerDB');
 
@@ -34,13 +35,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 require("./passportConfig")(passport);
 
-app.get('/*', function (req, res) {
-    res.sendFile(path.join(__dirname, 'client/build/index.html'), function (err) {
-        if (err) {
-            res.status(500).send("Error: " + err)
-        }
-    })
-})
+
 
 
 app.post("/api/login", (req, res, next) => {
@@ -206,3 +201,12 @@ if (process.env.NODE_ENV == "production") {
     app.use(express.static("client/build"));
 }
 
+
+//always put the catch all at the end 
+app.get('/*', function (req, res) {
+    res.sendFile(path.join(__dirname, './client/build/index.html'), function (err) {
+        if (err) {
+            res.status(500).send("Error: " + err)
+        }
+    })
+})
