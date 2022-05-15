@@ -54,7 +54,7 @@ function Bug() {
             })
     }
 
-    const deleteTicket = () =>{
+    const deleteTicket = () => {
         axios.delete("/api/ticket/" + id,
             { withCredentials: true })
             .then((res) => {
@@ -67,11 +67,12 @@ function Bug() {
     let isFirstDev = true
     return (
         <div>
-            <MyModal show={showModal} handleClose={()=>setShowModal(false)} handleShow={()=>setShowModal(true)} deleteTicket={deleteTicket}/>
+            <Sidebar userData={userData} />
+            <MyModal show={showModal} handleClose={() => setShowModal(false)} handleShow={() => setShowModal(true)} deleteTicket={deleteTicket} />
             <div className="singular-ticket-container">
                 <h1>{warning}</h1>
                 <h1>{bugData && bugData.title}</h1>
-                <p style={{color:"gray"}}>{bugData && bugData.timeSubmitted}</p>
+                <p style={{ color: "gray" }}>{bugData && bugData.timeSubmitted}</p>
                 <p style={{ color: "#ad1341" }}>Team: {bugData && bugData.team.map((dev) => {
                     if (isFirstDev) {
                         isFirstDev = false
@@ -81,24 +82,26 @@ function Bug() {
                     }
                 })}</p>
                 <p>{bugData && bugData.description}</p>
-                {isAdmin && <button type="button" className="btn btn-danger close-button" onClick={()=>setShowModal(!showModal)}>Close ticket</button>}
-                {isAdmin && <button type="button" className="btn btn-primary edit-button" onClick={()=>navigate("/edit/"+id)}>Edit</button>}
-            </div>
-            <div className="comments">
-                <h1>Comments</h1>
-                <div className="box-and-button">
-                    <input
-                        onChange={(event) => (setComment(event.target.value))}
-                        value={comment}
-                        className="form-control bg-dark text-white"
-                        placeholder="Enter a comment..."
-                    ></input>
-                    <button type="button" className="btn btn-primary" onClick={postComment}>Post</button>
+                {isAdmin && <button type="button" className="btn btn-danger close-button" onClick={() => setShowModal(!showModal)}>Close ticket</button>}
+                {isAdmin && <button type="button" className="btn btn-primary edit-button" onClick={() => navigate("/edit/" + id)}>Edit</button>}
+
+                <div className="comments">
+                    <h3>Comments</h3>
+                    <div className="box-and-button">
+                        <input
+                            onChange={(event) => (setComment(event.target.value))}
+                            value={comment}
+                            className="form-control bg-dark text-white"
+                            placeholder="Enter a comment..."
+                        ></input>
+                        <button type="button" className="btn btn-primary" onClick={postComment}>Post</button>
+                    </div>
+                    {bugData && bugData.comments.map((comment) =>
+                        <p key={comment}><span style={{ color: "#ad1341" }}>{comment.name + ":"}</span> {comment.comment}</p>)}
                 </div>
-                {bugData && bugData.comments.map((comment) =>
-                    <p key={comment}><span style={{ color: "#ad1341" }}>{comment.name + ":"}</span> {comment.comment}</p>)}
             </div>
-            <Sidebar userData={userData} />
+
+
         </div>
 
     )

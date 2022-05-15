@@ -53,9 +53,9 @@ function Dashboard() {
                 <table className="table table-dark ticket-table">
                     <thead>
                         <tr>
-                            <th scope="col" width="250">Ticket name</th>
-                            <th scope="col" width="400">Description</th>
-                            <th scope="col" width="250">Team</th>
+                            <th scope="col" width="20%">Ticket name</th>
+                            <th scope="col" width="40%">Description</th>
+                            <th scope="col" width="20%">Team</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -94,7 +94,7 @@ function Dashboard() {
 
 
 
-            <Sidebar userData={userData} />
+        <Sidebar userData={userData} />    
         </div>
 
     )
