@@ -58,6 +58,7 @@ function User() {
     return (
 
         <div>
+        <Sidebar />
             {email ?
                 <div>
                 <div className="singular-user-container">
@@ -86,7 +87,7 @@ function User() {
             : <h1 className="singular-user-container">No user found.</h1>
             }
             
-            <Sidebar />
+            
         </div>
     )
 

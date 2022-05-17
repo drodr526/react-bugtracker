@@ -26,7 +26,7 @@ body {
     padding-bottom: 50px;
 }
 
-.comments button{
+.comments button {
     display: inline-block;
 }
 
@@ -46,6 +46,10 @@ body {
     width: 800px;
     margin: 20px 0;
 
+}
+
+.hamburger-menu {
+    display: none;
 }
 
 .home-page {
@@ -131,8 +135,9 @@ body {
     margin: 20px 0;
 }
 
-@media only screen and (max-width: 1400px) {
-    .comments {
+@media only screen and (max-width: 720px) {
+
+    /* .comments {
         position: relative;
         margin: 40px 0;
     }
@@ -147,5 +152,57 @@ body {
     .contacts-names {
         font-size: 24px;
         margin: 30px 20px;
+    } */
+    .bugs-list-container {
+        left: 20px;
+        position: relative;
+        width: 75%;
+        margin: 20px 0;
     }
+
+    .submit-container {
+        left: 20px;
+        position: absolute;
+        width: 90%;
+        margin: 20px 0;
+    }
+
+
+    .hamburger-menu {
+        display: block;
+        z-index: 1;
+    }
+
+    .hamburger-menu p {
+        cursor: pointer;
+    }
+
+    .sidebar {
+        display: none;
+    }
+
+    .singular-ticket-container {
+        left: 20px;
+        position: relative;
+        width: 90%;
+        margin: 20px 0;
+        padding: 0 0 20px 0;
+    }
+
+    .user-list-container,
+    .singular-user-container {
+        left: 20px;
+        position: relative;
+        width: 80%;
+        margin: 20px 0;
+    }
+
+    .user-list-container {
+        left: 20px;
+        position: relative;
+        width: 40%;
+        margin: 20px 0;
+    }
+
+
 }

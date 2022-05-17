@@ -63,6 +63,7 @@ function Submit() {
 
     return (
         <div>
+        <Sidebar userData={userData} />
             <div className="submit-container form-group">
                 <h1>Submit a ticket</h1>
                 <input
@@ -90,7 +91,7 @@ function Submit() {
                 </select>
                 <button type="button" className="btn btn-primary" onClick={handleSubmit}>Submit</button>
             </div>
-            <Sidebar userData={userData} />
+            
         </div>
 
     )

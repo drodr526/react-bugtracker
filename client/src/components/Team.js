@@ -46,6 +46,7 @@ function Team() {
 
     return (
         <div>
+        <Sidebar userData={userData} />
             <div className="user-list-container">
                 <h1>Your team</h1>
                 <hr />
@@ -69,7 +70,7 @@ function Team() {
                     </tbody>
                 </table>
             </div>
-            <Sidebar userData={userData} />
+            
         </div>
 
     )

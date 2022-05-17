@@ -46,6 +46,7 @@ function Dashboard() {
 
     return (
         <div>
+        <Sidebar userData={userData} /> 
             <div className="bugs-list-container">
                 <h1>Your Dashboard</h1>
                 <hr />
@@ -94,7 +95,7 @@ function Dashboard() {
 
 
 
-        <Sidebar userData={userData} />    
+           
         </div>
 
     )
